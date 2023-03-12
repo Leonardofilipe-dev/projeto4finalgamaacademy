@@ -1,5 +1,6 @@
 import Produto from "../models/Produto.js"
 
+
 class ProdutosController {
     static async listar(req, res) {
     const listaDeProdutos = await Produto.find()
@@ -31,11 +32,11 @@ class ProdutosController {
     }
 
     static async cadastrar(req, res) {
-        const {nome, preco, descricao, categoria} = req.body
+        const {nome, preco, descricao, categoria, photo} = req.body
         let novoProduto = new Produto({
-        nome, preco, descricao, categoria, photo:"tes"
+        nome, photo: req.file.filename, preco, descricao, categoria
     });
-
+    console.log(photo)
     const resultado = await novoProduto.save();
 
     res.json(resultado)
