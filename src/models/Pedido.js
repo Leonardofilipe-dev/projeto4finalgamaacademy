@@ -16,7 +16,12 @@ const pedidoSchema = new mongoose.Schema({
     itens: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "itemPedido",
-    }]
+    }],
+
+    endereco: {
+        type:String,
+        required:"Esse campo é obrigatório"
+    }
 });
 
 
