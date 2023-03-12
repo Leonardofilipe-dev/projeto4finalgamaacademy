@@ -33,9 +33,9 @@ class PedidosController {
     }
 
     static async cadastrar(req, res) {
-        const {usuario, valorTotal, itens} = req.body
+        const {usuario, valorTotal, itens, endereco} = req.body
         let novoPedido = new Pedido({
-            usuario, valorTotal, itens
+            usuario, valorTotal, itens, endereco
     });
 
     const resultado = await novoPedido.save();
@@ -56,11 +56,11 @@ class PedidosController {
 
     static async atualizar(req, res) {
         const id = req.params.id
-        const {usuario, valorTotal, itens } = req.body
+        const {usuario, valorTotal, itens, endereco } = req.body
 
         try {
             
-            const pedidoAtualizado = await Pedido.findByIdAndUpdate(id, {usuario, valorTotal, itens});
+            const pedidoAtualizado = await Pedido.findByIdAndUpdate(id, {usuario, valorTotal, itens, endereco});
 
             
             return res.status(200).json(pedidoAtualizado);
