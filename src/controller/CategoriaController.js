@@ -1,21 +1,16 @@
 import Categoria from "../models/Categoria.js"
 
 class CategoriaController {
+ 
     static async listar(req, res) {
-    const listaDeCategorias = await Categoria.find()
-        res.json(listaDeCategorias)
         try {
-            let categorias = await listar();
-
-            return res.status(200).json(categorias);
+          let categorias = await Categoria.find();
+    
+          return res.status(200).json(categorias);
         } catch (error) {
-            return res.status(500).json({error});
+          return res.status(500).json({ error });
         }
-       
-            
-        
-    }
-   
+      }
 
 
     static async buscaPorId(req, res) {
