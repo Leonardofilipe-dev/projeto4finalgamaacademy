@@ -31,9 +31,9 @@ class UsuarioController{
     }
 
     static async cadastrar(req, res) {
-        const {nome, email, senha} = req.body
+        const {nome, email, senha, endereco} = req.body
         let novoUsuario = new Usuario ({
-        nome, email, senha
+        nome, email, senha, endereco
     });
 
     const resultado = await novoUsuario.save();
@@ -58,7 +58,7 @@ class UsuarioController{
 
         try {
             
-            const usuarioAtualizado = await Usuario.findByIdAndUpdate(id, {nome, email, senha});
+            const usuarioAtualizado = await Usuario.findByIdAndUpdate(id, {nome, email, senha, endereco});
 
             
             return res.status(200).json(usuarioAtualizado);
