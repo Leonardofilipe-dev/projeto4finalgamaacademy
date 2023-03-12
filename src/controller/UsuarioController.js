@@ -42,6 +42,26 @@ class UsuarioController{
 
     }
 
+    static async cadastrarAdm(req, res){
+        try {
+            let {email} = req.body;
+
+            let usuarioCadastrado = await buscarPorEmail(email);
+
+            if(usuarioCadastrado){
+                return res.status(400).json({erro: "Email já cadastrado."});
+            }
+
+            req.body.senha = bcrypt.hashSync(req.body.senha);
+
+            let novoUsuario = await Repository.criarAdm(req.body);
+
+            return res.status(201).json(novoUsuario);
+        } catch (error) {
+            return res.status(500).json({error});
+        }
+    }
+
     static async deletar(req, res) {
         const id = req.params.id
         try {
@@ -54,7 +74,7 @@ class UsuarioController{
 
     static async atualizar(req, res) {
         const id = req.params.id
-        const {nome, email, senha} = req.body
+        const {nome, email, senha, endereco} = req.body
 
         try {
             
