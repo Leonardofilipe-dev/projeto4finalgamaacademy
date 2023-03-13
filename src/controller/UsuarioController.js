@@ -40,28 +40,26 @@ class UsuarioController {
 
         res.json(resultado)
 
-}
+    }
 
     static async cadastrarAdm(req, res) {
-
         try {
-            let { email } = req.body;
+            const { nome, admin, email, senha, endereco } = req.body
+            let senhaHash = bcrypt.hashSync(senha)
+            let novoUsuario = new Usuario({
+                nome, admin, email, senha: senhaHash, endereco
+            });
 
-            let usuarioCadastrado = await buscarEmail(email);
 
-            if (usuarioCadastrado) {
-                return res.status(400).json({ erro: "Email já cadastrado." });
-            }
-
-            req.body.senha = bcrypt.hashSync(req.body.senha);
-
-            let novoUsuario = await cadastrarAdm(req.body);
-
-            return res.status(201).json(novoUsuario);
+            const resultado = await novoUsuario.save();
+            res.json(resultado)
 
         } catch (error) {
-            return res.status(500).json({ error });
+            console.log(error)
+            res.json()
+
         }
+
     }
 
     static async deletar(req, res) {
