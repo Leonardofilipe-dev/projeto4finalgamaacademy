@@ -18,6 +18,11 @@ const UsuarioSchema = new mongoose.Schema({
     required: true
   },
 
+  admin: {
+    type: Boolean,
+    default: false
+},
+
   endereco: {
     cep: {
       type: String,

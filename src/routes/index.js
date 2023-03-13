@@ -4,6 +4,7 @@ import categoriaRoutes from "./categoriaRoutes.js"
 import produtoRoutes from "./produtoRoutes.js"
 import usuarioRoutes from "./usuarioRouter.js"
 import pedidoRoutes from "./pedidosRoutes.js"
+import loginRoutes from "./loginRoutes.js"
 
 
 
@@ -14,6 +15,7 @@ const routes = (app) => {
         produtoRoutes,
         usuarioRoutes,
         pedidoRoutes,
+        loginRoutes
         
     )
 }
