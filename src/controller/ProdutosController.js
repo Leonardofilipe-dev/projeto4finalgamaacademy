@@ -36,7 +36,7 @@ class ProdutosController {
         let novoProduto = new Produto({
         nome, photo: req.file.filename, preco, descricao, categoria
     });
-    console.log(photo)
+    
     const resultado = await novoProduto.save();
 
     res.json(resultado)

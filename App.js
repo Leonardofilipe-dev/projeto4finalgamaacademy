@@ -10,7 +10,18 @@ db.once("open", () =>{
 })
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+    exposedHeaders: ['token']
+}
+
+app.use(cors(corsOptions));
+app.use((req, res, next) => {
+    res.header("Acess-Control-Allow-Origin", "*");
+    res.header("Acess-Control-Allow-Headers", true);
+    res.header("Acess-Control-Allow-Credentials", "Content-Type");
+    res.header("Acess-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    next();
+});
 routes(app)
 
 app.listen(5000, ()=>{
