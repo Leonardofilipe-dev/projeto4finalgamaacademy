@@ -21,12 +21,17 @@ class CategoriaController {
         } catch (err) {
             return res.status(500).json({ error: err.message });
         }
-
-    
     }
 
     static async cadastrar(req, res) {
         const {nome } = req.body
+
+        let categoriaCadastrada = await Categoria.findOne({nome});
+
+        if(categoriaCadastrada){
+            return res.status(400).json({erro: "Nome de categoria já cadastrado."});
+        }
+
         let novaCategoria = new Categoria({
         nome
     });
@@ -55,13 +60,10 @@ class CategoriaController {
             
             const categoriaAtualizada = await Categoria.findByIdAndUpdate(id, {nome:nome});
 
-            
             return res.status(200).json(categoriaAtualizada);
         } catch (err) {
             return res.status(500).json({ error: err.message });
         }
-
-
     }
 
 }
